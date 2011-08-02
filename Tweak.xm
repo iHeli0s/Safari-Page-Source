@@ -23,7 +23,6 @@ TabDocument *active;
 -(void)SPSOpenTwitter_2{
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://twitter.com/iHeli0s"]];
 
-
 }
 
 %end
@@ -46,6 +45,7 @@ selectedURL = [active URLString];
 
 }
 }
+[dict release];
 
 %orig;
 
@@ -95,6 +95,7 @@ else {
 	}
 
 }
+[dict release];
 
 
 
