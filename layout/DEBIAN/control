@@ -1,0 +1,9 @@
+Package: com.fr0zensun.safaripagesource
+Name: Safari Page Source
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: 
+Maintainer: heli0s
+Author: heli0s
+Section: Tweaks

@@ -1,0 +1,10 @@
+{
+	entry = {
+		bundle = "SafariPageSourceSettings";
+		cell = PSLinkCell;
+		detail = "settingsPSListController";
+		icon = "icon.png";
+		isController = 1;
+		label = "Safari Page Source";
+	};
+}

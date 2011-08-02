@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>defaults</key>
+			<string>com.fr0zensun.SafariPageSourceSettings</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>SPSEnabled</string>
+			<key>label</key>
+			<string>Enabled</string>
+		</dict>
+		<dict>
+			<key>defaults</key>
+			<string>com.fr0zensun.SafariPageSourceSettings</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>SPSOpenInNewWindow</string>
+			<key>label</key>
+			<string>Open in New Window</string>
+		</dict>
+		<dict>
+			<key>defaults</key>
+			<string>com.fr0zensun.SafariPageSourceSettings</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>key</key>
+			<string>simpleEnabled</string>
+			<key>label</key>
+			<string>Simple Source Viewer</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>SPSOpenTwitter</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Follow @Fr0zenSun</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>SPSOpenTwitter_2</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Follow @iHeli0s</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText </key>
+			<string>© 2011 Fr0zen Sun</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>Safari Page Source</string>
+</dict>
+</plist>
