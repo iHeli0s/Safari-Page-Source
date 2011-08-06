@@ -3,7 +3,7 @@
 		bundle = "SafariPageSourceSettings";
 		cell = PSLinkCell;
 		detail = "settingsPSListController";
-		icon = "icon.png";
+		icon = "";
 		isController = 1;
 		label = "Safari Page Source";
 	};

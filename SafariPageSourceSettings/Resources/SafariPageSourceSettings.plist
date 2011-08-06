@@ -34,7 +34,7 @@
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
-			<false/>
+			<true/>
 			<key>key</key>
 			<string>simpleEnabled</string>
 			<key>label</key>

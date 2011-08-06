@@ -8,7 +8,6 @@
 
 static NSString *selectedURL;
 static int buttonNumber;
-id linkSheet;
 @class BrowserController;
 
 TabDocument *active;
@@ -26,99 +25,50 @@ TabDocument *active;
 }
 
 %end
-%hook UIActionSheet
 
--(void)presentSheetInView:(id)view { 
-NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:PREFSPATH];
-if ([[dict objectForKey:@"SPSEnabled"] boolValue])
-{
-		if(self.numberOfButtons > 4 && self != linkSheet) {
-[self addButtonWithTitle:@"View Page Source"];
-id button = [[self buttons] lastObject];
-			[[self buttons] removeObject:button];			
-		self.cancelButtonIndex = self.numberOfButtons;
-
-			[[self buttons] insertObject:button atIndex:self.numberOfButtons - 1];
-			buttonNumber = self.numberOfButtons - 1;
-
-selectedURL = [active URLString];
-
-}
-}
-[dict release];
-
-%orig;
-
-}
-
-
-
-
-
-%end
 %hook TabController
 - (void)setActiveTabDocument:(id)arg1 {
 active = arg1;
 %orig;
 }
-
-
-%end
-%hook UIWebDocumentView
-
--(void)actionSheet:(id)sheet clickedButtonAtIndex:(int)index {
-if (index == buttonNumber) {
-NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:PREFSPATH];
-if ([[dict objectForKey:@"SPSEnabled"] boolValue])
-{	
-%class BrowserController;
-
-NSString *path = nil;
-	if ([[dict objectForKey:@"simpleEnabled"] boolValue]) {
-
-path = @"file:///Library/PreferenceBundles/SafariPageSourceSettings.bundle/index_simple.html?url=";
-}
-else {
-path = @"file:///Library/PreferenceBundles/SafariPageSourceSettings.bundle/index.html?url=";
-
-
-}
-NSString *finalString = [NSString stringWithFormat:@"%@%@",path,selectedURL];
-	id controller = [$BrowserController sharedBrowserController];
-	NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:PREFSPATH];
-if ([[dict objectForKey:@"SPSOpenInNewWindow"] boolValue])
-{
-[controller loadURLInNewWindow:[NSURL URLWithString:finalString] animated:YES];
-}
-else {
-	[active loadURL:[NSURL URLWithString:finalString] userDriven:YES];
-	}
-
-}
-[dict release];
-
-
-
-}
-
-%orig;		
-
-}
 %end
 
 
 %hook ActionPanel
+- (void)setVisible:(BOOL)arg1 animate:(BOOL)arg2 {
 
+%orig;
+   UIActionSheet *sheet = MSHookIvar<UIActionSheet *>(self, "_sheet"); 
+
+NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:PREFSPATH];
+if ([[dict objectForKey:@"SPSEnabled"] boolValue] ||[dict objectForKey:@"SPSEnabled"] == nil )
+{
+[sheet addButtonWithTitle:@"View Page Source"];
+id button = [[sheet buttons] lastObject];
+			[[sheet buttons] removeObject:button];			
+		sheet.cancelButtonIndex = sheet.numberOfButtons;
+
+			[[sheet buttons] insertObject:button atIndex:sheet.numberOfButtons - 1];
+			buttonNumber = sheet.numberOfButtons - 1;
+
+selectedURL = [active URLString];
+[sheet layout];
+
+
+}
+[dict release];
+
+}
 
 %new(v@:@i)
 - (void)actionSheet:(id)arg1 clickedButtonAtIndex:(int)arg2 {
 NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:PREFSPATH];
-if ([[dict objectForKey:@"SPSEnabled"] boolValue])
+if ([[dict objectForKey:@"SPSEnabled"] boolValue] ||[dict objectForKey:@"SPSEnabled"] == nil )
 {
     if (arg2 == buttonNumber) {
 	%class BrowserController;
 NSString *path = nil;
-	if ([[dict objectForKey:@"simpleEnabled"] boolValue]) {
+	if ([[dict objectForKey:@"simpleEnabled"] boolValue] || [dict objectForKey:@"simpleEnabled"] == nil ) {
 
 path = @"file:///Library/PreferenceBundles/SafariPageSourceSettings.bundle/index_simple.html?url=";
 }
@@ -129,7 +79,7 @@ path = @"file:///Library/PreferenceBundles/SafariPageSourceSettings.bundle/index
 }NSString *finalString = [NSString stringWithFormat:@"%@%@",path,selectedURL];
 	id controller = [$BrowserController sharedBrowserController];
 	NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:PREFSPATH];
-if ([[dict objectForKey:@"SPSOpenInNewWindow"] boolValue])
+if ([[dict objectForKey:@"SPSOpenInNewWindow"] boolValue] || [dict objectForKey:@"SPSOpenInNewWindow"] == nil)
 {
 [controller loadURLInNewWindow:[NSURL URLWithString:finalString] animated:YES];
 }
@@ -142,4 +92,9 @@ else {
 %orig;
 }
 
-%end;
+%end
+
+
+
+
+
